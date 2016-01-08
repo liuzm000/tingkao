@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">tingkao</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="txt">package test.com.materialdesign.activity;
+
+import android.os.Bundle;
+import android.os.Message;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.NestedScrollView;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.androidadvance.topsnackbar.TSnackbar;
+
+import org.apache.commons.io.IOUtils;
+
+import java.io.InputStream;
+
+import test.com.materialdesign.R;
+
+public class HomeActivity extends BaseActivity {
+
+    private FloatingActionButton fab;
+    private ImageView mImageView;
+    private TextView mTextView;
+    private CollapsingToolbarLayout ctl;
+    private CoordinatorLayout cdl ;
+    private NestedScrollView nestedScrollView ;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        initToolbar();
+        initWidget();
+        setListener();
+
+    }
+
+    private void setListener() {
+        fab.setOnClickListener(clickListener);
+    }
+
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        public void onClick(View view) {
+            int id = view.getId();
+            if (id == R.id.fab2) {
+                snackbar();
+            }
+        }
+    };
+
+    private void snackbar(){
+        final Snackbar snackbar =  Snackbar.make(cdl, "Replace with your own action", Snackbar.LENGTH_SHORT);
+        snackbar.setAction("colose", new View.OnClickListener() {
+            public void onClick(View view) {
+                snackbar.dismiss();
+            }
+        });
+        snackbar.show();
+    }
+
+    private void initWidget() {
+
+        //  toolbar.setNavigationIcon(android.R.drawable.ic_dialog_email);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // getActionBar().setHomeButtonEnabled(true);
+
+      //  toolbar.setNavigationOnClickListener(clickListener); // 没有用
+
+        fab = (FloatingActionButton) findViewById(R.id.fab2);
+        mImageView = (ImageView) findViewById(R.id.image);
+
+        mTextView = (TextView) findViewById(R.id.textView);
+
+        mHandler.sendEmptyMessage(11);
+
+        ctl = (CollapsingToolbarLayout) findViewById(R.id.ctl);
+        ctl.setTitle(getResources().getString(R.string.nickname));
+
+        cdl = (CoordinatorLayout)findViewById(R.id.container);
+
+        nestedScrollView = (NestedScrollView)findViewById(R.id.scrollView);
+
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+
+            }
+        });
+
+    }
+
+    private android.os.Handler mHandler = new android.os.Handler() {
+
+        public void dispatchMessage(Message msg) {
+            if (msg.what == 11) {
+                mTextView.setText(getTxt());
+            }
+        }
+    };
+
+    private String getTxt() {
+        InputStream is = null;
+        try {
+            is = getResources().getAssets().open("content.txt");
+            String txt = IOUtils.toString(is);
+            return txt;
+        } catch (Exception e) {
+
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (Exception e2) {
+
+                }
+            }
+        }
+        return "";
+    }
+}
+        
+
+package test.com.materialdesign.activity;
+
+import android.os.Bundle;
+import android.os.Message;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.NestedScrollView;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.androidadvance.topsnackbar.TSnackbar;
+
+import org.apache.commons.io.IOUtils;
+
+import java.io.InputStream;
+
+import test.com.materialdesign.R;
+
+public class HomeActivity extends BaseActivity {
+
+    private FloatingActionButton fab;
+    private ImageView mImageView;
+    private TextView mTextView;
+    private CollapsingToolbarLayout ctl;
+    private CoordinatorLayout cdl ;
+    private NestedScrollView nestedScrollView ;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        initToolbar();
+        initWidget();
+        setListener();
+
+    }
+
+    private void setListener() {
+        fab.setOnClickListener(clickListener);
+    }
+
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        public void onClick(View view) {
+            int id = view.getId();
+            if (id == R.id.fab2) {
+                snackbar();
+            }
+        }
+    };
+
+    private void snackbar(){
+        final Snackbar snackbar =  Snackbar.make(cdl, "Replace with your own action", Snackbar.LENGTH_SHORT);
+        snackbar.setAction("colose", new View.OnClickListener() {
+            public void onClick(View view) {
+                snackbar.dismiss();
+            }
+        });
+        snackbar.show();
+    }
+
+    private void initWidget() {
+
+        //  toolbar.setNavigationIcon(android.R.drawable.ic_dialog_email);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // getActionBar().setHomeButtonEnabled(true);
+
+      //  toolbar.setNavigationOnClickListener(clickListener); // 没有用
+
+        fab = (FloatingActionButton) findViewById(R.id.fab2);
+        mImageView = (ImageView) findViewById(R.id.image);
+
+        mTextView = (TextView) findViewById(R.id.textView);
+
+        mHandler.sendEmptyMessage(11);
+
+        ctl = (CollapsingToolbarLayout) findViewById(R.id.ctl);
+        ctl.setTitle(getResources().getString(R.string.nickname));
+
+        cdl = (CoordinatorLayout)findViewById(R.id.container);
+
+        nestedScrollView = (NestedScrollView)findViewById(R.id.scrollView);
+
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+
+            }
+        });
+
+    }
+
+    private android.os.Handler mHandler = new android.os.Handler() {
+
+        public void dispatchMessage(Message msg) {
+            if (msg.what == 11) {
+                mTextView.setText(getTxt());
+            }
+        }
+    };
+
+    private String getTxt() {
+        InputStream is = null;
+        try {
+            is = getResources().getAssets().open("content.txt");
+            String txt = IOUtils.toString(is);
+            return txt;
+        } catch (Exception e) {
+
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (Exception e2) {
+
+                }
+            }
+        }
+        return "";
+    }
+}</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_float_view">FloatViewActivity</string>
+    <string name="title_activity_rotation">RotationActivity</string>
+    <string name="title_activity_locus_animation">沿着某种轨迹运动的动画</string>
+    <string name="title_activity_set_page_transformer_demo">SetPageTransformerDemoActivity</string>
+    <string name="title_activity_recycler_view">RecyclerViewActivity</string>
+    <string name="title_activity_image_maps">ImageMapsActivity</string>
+    <string name="title_activity_horizontal_scroll_view">HorizontalScrollViewActivity</string>
+    <string name="title_activity_gallery">GalleryActivity</string>
+
+</resources>
